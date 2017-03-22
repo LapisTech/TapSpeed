@@ -42,9 +42,7 @@ function resultEvent( d ) {
 		'Fastest: ' + min + ' msec/count',
 	].join( '\n' );
 }
-function tapEvent( e ) {
-	e.preeventDefault();
-	e.stopPropgation();
+function tapEvent() {
 	if ( !end ) { end = begin = Date.now(); return; } resultEvent( Date.now() );
 }
 function touchable(){
@@ -53,6 +51,7 @@ function touchable(){
 	return (typeof div.ontouchstart === 'function');
 }
 document.getElementById( 'tap' ).addEventListener( touchable() ? 'touchstart' : 'mousedown', tapEvent, false );
+document.getElementById( 'tap' ).addEventListener( 'touchend', function(e){e.preventDefault()}, false );
 document.getElementById( 'reset' ).addEventListener( 'click', resetEvent, false );
 </script>
 </body>
