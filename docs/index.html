@@ -42,7 +42,9 @@ function resultEvent( d ) {
 		'Fastest: ' + min + ' msec/count',
 	].join( '\n' );
 }
-function tapEvent() {
+function tapEvent( e ) {
+	e.preeventDefault();
+	e.stopPropgation();
 	if ( !end ) { end = begin = Date.now(); return; } resultEvent( Date.now() );
 }
 function touchable(){
